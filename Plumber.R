@@ -34,6 +34,9 @@ function(n = 100){
   library(tidyverse)
   library(gganimate)
   
+  library(dplyr)
+  library(gganimate)
+  
   anim <-
     ggplot(iris, aes(x = Petal.Width, y = Petal.Length)) + 
     geom_point() + transition_states(Species,
@@ -42,13 +45,43 @@ function(n = 100){
     ggtitle('Now showing {closest_state}',
             subtitle = 'Frame {frame} of {nframes}')
   
-  file <- 'test.gif'
+  giffile <- 'test.gif'
   
   anim %>%
-    anim_save(filename = file)
+    anim_save(filename = giffile)
+  
+  readBin(giffile, 'raw', n = file.info(giffile)$size)
+}
+
+
+
+#* Plumber X-Y Plot
+#* @get /xy.png
+#* @serializer contentType list(type='image/png')
+function(x = 1:10, y = 1:10){
+  
+  library(tidyverse)
+  
+  x <- x %>% str_split('-') %>% unlist() %>% as.numeric()
+  y <- y %>% str_split('-') %>% unlist() %>% as.numeric()
+  
+  df <- 
+    tibble(x = x, y = y)
+  
+  graph <-
+    df %>% 
+    ggplot() + 
+    geom_point(aes(x, y)) + 
+    theme_minimal()
+  
+  file <- 'test.png'
+  
+  graph %>% 
+    ggsave(filename = file)
   
   readBin(file, 'raw', n = file.info(file)$size)
 }
+
 
 
 
