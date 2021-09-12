@@ -4,7 +4,7 @@
 if(Sys.getenv('PORT') == '') Sys.setenv(PORT = 8000)
 
 #* Plumber Test
-#* @get /test
+#* @get /test.png
 #* @serializer contentType list(type='image/png')
 function(n = 100){
   
