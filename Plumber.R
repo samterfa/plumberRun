@@ -24,3 +24,12 @@ function(n = 100){
   
   readBin(file, 'raw', n = file.info(file)$size)
 }
+
+
+#* @get /
+#* @html
+function(){
+  "<html><h1>It works!</h1></html>"
+}
+
+
