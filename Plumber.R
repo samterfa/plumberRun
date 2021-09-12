@@ -86,14 +86,14 @@ function(x = 1:10, y = 1:10){
 
 
 #* Plumber X-Y Plot
-#* @get /xyhex.png
+#* @get /xy2.png
 #* @serializer contentType list(type='image/png')
-function(x = 1:10, y = 1:10){
+function(b = 16, x = 1:10, y = 1:10){
   
   library(tidyverse)
   
-  x <- x %>% str_split('-') %>% unlist() %>% strtoi(base = 16)
-  y <- y %>% str_split('-') %>% unlist() %>% strtoi(base = 16)
+  x <- x %>% str_split('-') %>% unlist() %>% strtoi(base = b)
+  y <- y %>% str_split('-') %>% unlist() %>% strtoi(base = b)
   
   df <- 
     tibble(x = x, y = y)
