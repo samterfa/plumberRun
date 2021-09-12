@@ -1,6 +1,8 @@
 #' @apiTitle My R Service
 #' @apiDescription This service runs R scripts on Google Cloud Run.
 
+if(Sys.getenv('PORT') == '') Sys.setenv(PORT = 8000)
+
 #* Plumber Test
 #* @get /test
 #* @serializer contentType list(type='image/png')
