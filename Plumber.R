@@ -26,6 +26,33 @@ function(n = 100){
 }
 
 
+#* Plumber Test Gif
+#* @get /test.gif
+#* @serializer contentType list(type='image/gif')
+function(n = 100){
+  
+  library(tidyverse)
+  library(gganimate)
+  
+  anim <-
+    ggplot(iris, aes(x = Petal.Width, y = Petal.Length)) + 
+    geom_point() + transition_states(Species,
+                                     transition_length = 2,
+                                     state_length = 1) + theme_minimal() +
+    ggtitle('Now showing {closest_state}',
+            subtitle = 'Frame {frame} of {nframes}')
+  
+  file <- 'test.gif'
+  
+  anim %>%
+    anim_save(filename = file)
+  
+  readBin(file, 'raw', n = file.info(file)$size)
+}
+
+
+
+
 #* @get /
 #* @html
 function(){

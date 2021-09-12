@@ -1,8 +1,8 @@
 FROM rocker/tidyverse
 
-# RUN install2.r plumber  # Add more packages separated by spaces.
+RUN install2.r gganimate gifski # Add more packages separated by spaces.
 
-RUN installGithub.r rstudio/plumber # Uncomment to add Github packages.
+RUN installGithub.r rstudio/plumber # Github packages.
 
 COPY [".", "./"]
 

@@ -1,3 +1,5 @@
 .R*
 *.Rproj
 *.png
+.Rproj.user
+.DS*
