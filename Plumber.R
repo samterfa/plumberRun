@@ -85,6 +85,35 @@ function(x = 1:10, y = 1:10){
 
 
 
+#* Plumber X-Y Plot
+#* @get /xyhex.png
+#* @serializer contentType list(type='image/png')
+function(x = 1:10, y = 1:10){
+  
+  library(tidyverse)
+  
+  x <- x %>% str_split('-') %>% unlist() %>% strtoi(base = 16)
+  y <- y %>% str_split('-') %>% unlist() %>% strtoi(base = 16)
+  
+  df <- 
+    tibble(x = x, y = y)
+  
+  graph <-
+    df %>% 
+    ggplot() + 
+    geom_point(aes(x, y)) + 
+    theme_minimal()
+  
+  file <- 'test.png'
+  
+  graph %>% 
+    ggsave(filename = file)
+  
+  readBin(file, 'raw', n = file.info(file)$size)
+}
+
+
+
 
 #* @get /
 #* @html
