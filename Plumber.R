@@ -12,7 +12,7 @@ function(n = 100){
   
   graph <-
     iris %>% 
-    head(n) %>%
+    slice(1:n) %>%
     ggplot() + 
     geom_point(aes(Sepal.Length, Sepal.Width)) + 
     theme_minimal()
